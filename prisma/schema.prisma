@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//criar uma migration
+model User {
+  id         String    @id @default(uuid())
+  name       String
+  email      String    @unique
+  password   String
+  biografia  String
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+}
+
+model Campanhas {
+  id            String       @id @default(uuid())
+  icon_campanha String
+  titulo        String
+  descricao     String
+  personagens   Personagem[]
+  created_at    DateTime?    @default(now())
+  updated_at    DateTime?    @default(now())
+}
+
+model Personagem {
+  id              String       @id @default(uuid())
+  icon_personagem String
+  nome            String
+  descricao       String
+  classe          String
+  nivel           Int
+  raca            String
+  pontosDeVida    Int
+  inventarios     Inventario[]
+  atributos       Atributo[]
+  Campanhas       Campanhas?   @relation(fields: [campanhasId], references: [id])
+  campanhasId     String?
+}
+
+model Inventario {
+  id           String     @id @default(uuid())
+  nomeDoItem   String
+  tipoDoItem   String
+  descricao    String?
+  quantidade   Int
+  personagem   Personagem @relation(fields: [personagemId], references: [id])
+  personagemId String
+}
+
+model Atributo {
+  id           String     @id @default(uuid())
+  forca        Int
+  destreza     Int
+  constituicao Int
+  inteligencia Int
+  sabedoria    Int
+  carisma      Int
+  personagem   Personagem @relation(fields: [personagemId], references: [id])
+  personagemId String
+}
