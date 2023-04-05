@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { UpdatePersonagemService } from '../../services/personagens/UpdatePersonagemService';
 
 class UpdatePersonagemController {
-    async handle(request: Request, response: Response) {
-        const { id, nome, descricao, classe, nivel, raca, pontosDeVida } = request.body;
+    async handle(req: Request, res: Response) {
+        const { id, nome, descricao, classe, nivel, raca, pontosDeVida } = req.body;
 
         const updatePersonagemService = new UpdatePersonagemService();
 
@@ -17,7 +17,7 @@ class UpdatePersonagemController {
             pontosDeVida,
         });
 
-        return response.json(personagem);
+        return res.json(personagem);
     }
 }
 
