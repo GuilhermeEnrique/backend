@@ -1,8 +1,7 @@
-import { Personagem, PrismaClient } from "@prisma/client";
+import prismaClient from "../../prisma";
 
-const prisma = new PrismaClient();
-
-interface PersongemRequest {
+interface IRequest {
+    id: string;
     nome: string;
     descricao: string;
     classe: string;
@@ -12,21 +11,36 @@ interface PersongemRequest {
 }
 
 class UpdatePersonagemService {
-    async update(id: string, { nome, descricao, classe, nivel, raca, pontosDeVida, }: PersongemRequest): Promise <Personagem> {
-        const personagem = await prisma.personagem.update({
-        where: { id: id },
-        data: {
-            nome: nome,
-            descricao,
-            classe,
-            nivel: { set: nivel },
-            raca,
-            pontosDeVida: { set: pontosDeVida }
-        },
-    });
+    async execute({ id, nome, descricao, classe, nivel, raca, pontosDeVida }: IRequest) {
+        const personagem = await prismaClient.personagem.findUnique({
+            where: {
+                id,
+            },
+        });
 
-        return personagem;
+        if (!personagem) {
+            throw new Error("Personagem não encontrado");
+        }
+
+        const updatedPersonagem = await prismaClient.personagem.update({
+            where: {
+                id,
+            },
+            data: {
+                ...personagem,
+                nome,
+                descricao,
+                classe,
+                nivel,
+                raca,
+                pontosDeVida,
+            },
+        });
+
+        return updatedPersonagem;
     }
 }
 
 export { UpdatePersonagemService };
+
+

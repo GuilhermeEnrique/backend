@@ -16,6 +16,8 @@ import { ListPersonagemController } from './controllers/personagens/ListPersonag
 import { DeletePersonagemController } from './controllers/personagens/DeletePersonagemController';
 import { UpdatePersonagemController } from './controllers/personagens/UpdatePersonagemController';
 
+
+
 //Controllers dos itens
 import { CreateItensController } from './controllers/personagens/inventario/CreateItensController';
 import { ListItensController } from './controllers/personagens/inventario/ListItensController';
@@ -49,7 +51,7 @@ router.get('/campanha', isAuthenticated, new ListCampanhaController().handle)
 router.post('/personagem', isAuthenticated, upload.single('file'), new CreatePersonagemController().handle)
 router.get('/campanha/personagens', isAuthenticated, new ListPersonagemController().handle)
 router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersonagemController().handle)
-router.put('/personagem/update', isAuthenticated, new UpdatePersonagemController().handle)
+router.put('/personagem/:id', isAuthenticated, new UpdatePersonagemController().handle);
 
 //rota dos itens
 router.post('/personagem/itens', isAuthenticated, new CreateItensController().handle)

@@ -1,25 +1,23 @@
-import { Request, Response } from "express";
-import { UpdatePersonagemService } from "../../services/personagens/UpdatePersonagemService";
+import { Request, Response } from 'express';
+import { UpdatePersonagemService } from '../../services/personagens/UpdatePersonagemService';
 
 class UpdatePersonagemController {
-    async handle(req: Request, res: Response) {
-        const { id } = req.params;
+    async handle(request: Request, response: Response) {
+        const { id, nome, descricao, classe, nivel, raca, pontosDeVida } = request.body;
 
-        const { nome, descricao, classe, nivel, raca, pontosDeVida } = req.body;
-        
         const updatePersonagemService = new UpdatePersonagemService();
 
-        const personagem = await updatePersonagemService.update(id, {
+        const personagem = await updatePersonagemService.execute({
+            id,
             nome,
             descricao,
             classe,
             nivel,
             raca,
-            pontosDeVida
+            pontosDeVida,
         });
 
-        return res.json(personagem);
-
+        return response.json(personagem);
     }
 }
 
