@@ -16,7 +16,8 @@ import { ListPersonagemController } from './controllers/personagens/ListPersonag
 import { DeletePersonagemController } from './controllers/personagens/DeletePersonagemController';
 import { UpdatePersonagemController } from './controllers/personagens/UpdatePersonagemController';
 
-
+//Controller das imagem
+import { UploadImageController } from './controllers/imagem/UploadImageController';
 
 //Controllers dos itens
 import { CreateItensController } from './controllers/personagens/inventario/CreateItensController';
@@ -32,11 +33,12 @@ import { DeleteAtributosController } from './controllers/personagens/atributos/D
 //Middleware de autenticidade
 import { isAuthenticated } from './middlewares/isAuthenticated';
 
+//importar Configurações do multer
 import uploadConfig from './config/multer'
 
 const router = Router();
 
-const upload = multer(uploadConfig.upload("./tmp"));
+const upload = multer(uploadConfig.upload("./uploads"));
 
 //rotas dos users
 router.post('/users', new CreateUserController().handle)
@@ -44,14 +46,17 @@ router.post('/session', new AuthUserController().handle)
 router.get('/about', isAuthenticated, new DetailUserController().handle)
 
 //rotas das campanhas
-router.post('/campanha', isAuthenticated, upload.single('file'), new CreateCampanhaController().handle)
+router.post('/campanha', isAuthenticated, new CreateCampanhaController().handle)
 router.get('/campanha', isAuthenticated, new ListCampanhaController().handle)
 
 //rota dos personagens
-router.post('/personagem', isAuthenticated, upload.single('file'), new CreatePersonagemController().handle)
+router.post('/personagem', isAuthenticated, new CreatePersonagemController().handle)
 router.get('/campanha/personagens', isAuthenticated, new ListPersonagemController().handle)
 router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersonagemController().handle)
 router.put('/personagem/:id', isAuthenticated, new UpdatePersonagemController().handle);
+
+//rota de upload das imagens
+router.post('/upload/imagem', upload.single('image'), new UploadImageController().handle)
 
 //rota dos itens
 router.post('/personagem/itens', isAuthenticated, new CreateItensController().handle)
