@@ -18,6 +18,7 @@ import { UpdatePersonagemController } from './controllers/personagens/UpdatePers
 
 //Controller das imagem
 import { UploadImageController } from './controllers/imagem/UploadImageController';
+import { DeleteImageController } from './controllers/imagem/DeleteImagemController';
 
 //Controllers dos itens
 import { CreateItensController } from './controllers/personagens/inventario/CreateItensController';
@@ -56,7 +57,8 @@ router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersona
 router.put('/personagem/:id', isAuthenticated, new UpdatePersonagemController().handle);
 
 //rota de upload das imagens
-router.post('/upload/imagem', upload.single('image'), new UploadImageController().handle)
+router.post('/upload/imagem', isAuthenticated, upload.single('image'), new UploadImageController().handle)
+router.delete('/delete/imagem', isAuthenticated, new DeleteImageController().handle)
 
 //rota dos itens
 router.post('/personagem/itens', isAuthenticated, new CreateItensController().handle)
