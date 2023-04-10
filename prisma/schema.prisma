@@ -22,28 +22,30 @@ model User {
 }
 
 model Campanhas {
-  id            String       @id @default(uuid())
-  icon_campanha String
-  titulo        String
-  descricao     String
-  personagens   Personagem[]
-  created_at    DateTime?    @default(now())
-  updated_at    DateTime?    @default(now())
+  id          String       @id @default(uuid())
+  titulo      String
+  descricao   String?
+  imagens     String?
+  personagens Personagem[]
+  imagem      Imagem[]
+  created_at  DateTime?    @default(now())
+  updated_at  DateTime?    @default(now())
 }
 
 model Personagem {
-  id              String       @id @default(uuid())
-  icon_personagem String
-  nome            String
-  descricao       String
-  classe          String
-  nivel           Int
-  raca            String
-  pontosDeVida    Int
-  inventarios     Inventario[]
-  atributos       Atributo[]
-  Campanhas       Campanhas?   @relation(fields: [campanhasId], references: [id])
-  campanhasId     String?
+  id           String       @id @default(uuid())
+  nome         String
+  descricao    String
+  classe       String
+  nivel        Int
+  raca         String
+  pontosDeVida Int
+  imagens      String?
+  inventarios  Inventario[]
+  atributos    Atributo[]
+  imagem       Imagem[]
+  Campanhas    Campanhas?   @relation(fields: [campanhasId], references: [id])
+  campanhasId  String?
 }
 
 model Inventario {
@@ -66,4 +68,13 @@ model Atributo {
   carisma      Int
   personagem   Personagem @relation(fields: [personagemId], references: [id])
   personagemId String
+}
+
+model Imagem {
+  id           String      @id @default(uuid())
+  url          String
+  personagem   Personagem? @relation(fields: [personagemId], references: [id])
+  campanha     Campanhas?  @relation(fields: [campanhasId], references: [id])
+  personagemId String?
+  campanhasId  String?
 }
