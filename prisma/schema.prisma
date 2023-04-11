@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//criar uma migration
 model User {
   id         String    @id @default(uuid())
   name       String
@@ -24,12 +20,11 @@ model User {
 model Campanhas {
   id          String       @id @default(uuid())
   titulo      String
-  descricao   String?
-  imagens     String?
-  personagens Personagem[]
-  imagem      Imagem[]
+  descricao   String
   created_at  DateTime?    @default(now())
   updated_at  DateTime?    @default(now())
+  imagem      Imagem[]
+  personagens Personagem[]
 }
 
 model Personagem {
@@ -40,12 +35,11 @@ model Personagem {
   nivel        Int
   raca         String
   pontosDeVida Int
-  imagens      String?
-  inventarios  Inventario[]
+  campanhasId  String?
   atributos    Atributo[]
   imagem       Imagem[]
+  inventarios  Inventario[]
   Campanhas    Campanhas?   @relation(fields: [campanhasId], references: [id])
-  campanhasId  String?
 }
 
 model Inventario {
@@ -54,8 +48,8 @@ model Inventario {
   tipoDoItem   String
   descricao    String?
   quantidade   Int
-  personagem   Personagem @relation(fields: [personagemId], references: [id])
   personagemId String
+  personagem   Personagem @relation(fields: [personagemId], references: [id])
 }
 
 model Atributo {
@@ -66,15 +60,17 @@ model Atributo {
   inteligencia Int
   sabedoria    Int
   carisma      Int
-  personagem   Personagem @relation(fields: [personagemId], references: [id])
   personagemId String
+  personagem   Personagem @relation(fields: [personagemId], references: [id])
 }
 
 model Imagem {
   id           String      @id @default(uuid())
   url          String
-  personagem   Personagem? @relation(fields: [personagemId], references: [id])
-  campanha     Campanhas?  @relation(fields: [campanhasId], references: [id])
   personagemId String?
   campanhasId  String?
+  created_at   DateTime?   @default(now())
+  updated_at   DateTime?   @default(now())
+  campanha     Campanhas?  @relation(fields: [campanhasId], references: [id])
+  personagem   Personagem? @relation(fields: [personagemId], references: [id])
 }

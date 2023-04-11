@@ -9,6 +9,7 @@ import { DetailUserController } from './controllers/user/DetailUserController';
 //Controllers das Campanhas
 import { CreateCampanhaController } from './controllers/campanha/CreateCampanhaController';
 import { ListCampanhaController } from './controllers/campanha/ListCampanhaController';
+import { DeleteCamapanhaController } from './controllers/campanha/DeleteCampanhaController';
 
 //Controllers dos Personagens
 import { CreatePersonagemController } from './controllers/personagens/CreatePersonagemController';
@@ -49,6 +50,7 @@ router.get('/about', isAuthenticated, new DetailUserController().handle)
 //rotas das campanhas
 router.post('/campanha', isAuthenticated, new CreateCampanhaController().handle)
 router.get('/campanha', isAuthenticated, new ListCampanhaController().handle)
+router.delete('/campanha/delete', isAuthenticated, new DeleteCamapanhaController().handle)
 
 //rota dos personagens
 router.post('/personagem', isAuthenticated, new CreatePersonagemController().handle)
