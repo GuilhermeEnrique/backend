@@ -25,6 +25,7 @@ import { DeleteImageController } from './controllers/imagem/DeleteImagemControll
 //Controllers dos itens
 import { CreateItensController } from './controllers/personagens/inventario/CreateItensController';
 import { ListItensController } from './controllers/personagens/inventario/ListItensController';
+import { UpdateInventarioController } from './controllers/personagens/inventario/UpdateInventarioController';
 import { DeleteItensController } from './controllers/personagens/inventario/DeleteItensController';
 import { DeleteAllItensController } from './controllers/personagens/inventario/DeleteAllItensController';
 
@@ -65,10 +66,11 @@ router.post('/upload/imagem', isAuthenticated, upload.single('image'), new Uploa
 router.delete('/delete/imagem', isAuthenticated, new DeleteImageController().handle)
 
 //rota dos itens
-router.post('/personagem/itens', isAuthenticated, new CreateItensController().handle)
-router.get('/personagem/itens', isAuthenticated, new ListItensController().handle)
-router.delete('/personagem/itens/delete', isAuthenticated, new DeleteItensController().handle)
-router.delete('/personagem/itens/deleteAll', isAuthenticated, new DeleteAllItensController().handle)
+router.post('/personagem/inventario', isAuthenticated, new CreateItensController().handle)
+router.get('/personagem/inventario', isAuthenticated, new ListItensController().handle)
+router.put('/personagem/inventario/update', isAuthenticated, new UpdateInventarioController().handle)
+router.delete('/personagem/inventario/delete', isAuthenticated, new DeleteItensController().handle)
+router.delete('/personagem/inventario/deleteAll', isAuthenticated, new DeleteAllItensController().handle)
 
 //rotas dos atributos
 router.post('/personagem/atributos', isAuthenticated, new CreateAtributosController().handle)
