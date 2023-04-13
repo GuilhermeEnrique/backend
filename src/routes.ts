@@ -5,6 +5,7 @@ import multer from 'multer';
 import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from './controllers/user/AuthUserController';
 import { DetailUserController } from './controllers/user/DetailUserController';
+import { UpdatePasswordController } from './controllers/user/UpdatePasswordController';
 
 //Controllers das Campanhas
 import { CreateCampanhaController } from './controllers/campanha/CreateCampanhaController';
@@ -48,6 +49,7 @@ const upload = multer(uploadConfig.upload("./uploads"));
 router.post('/users', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 router.get('/about', isAuthenticated, new DetailUserController().handle)
+router.put('/user/password', isAuthenticated, new UpdatePasswordController().handle)
 
 //rotas das campanhas
 router.post('/campanha', isAuthenticated, new CreateCampanhaController().handle)
