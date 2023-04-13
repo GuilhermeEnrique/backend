@@ -12,7 +12,7 @@ class CreateUserService {
     async execute({ name, biografia, email, password }: UserRequest) {
         //verificar se enviou um email
         if (!email) {
-            throw new Error("E-mail incorrect")
+            throw new Error("E-mail incorreto")
         }
 
         //verificar se email já esta cadastrado no banco
@@ -23,7 +23,7 @@ class CreateUserService {
         })
 
         if (userAlreadyExists) {
-            throw new Error("User already exists");
+            throw new Error("Usuário já existe");
         }
 
         const passwordHash = await hash(password, 8)
