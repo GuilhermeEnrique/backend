@@ -2,16 +2,16 @@ import prismaClient from "../../prisma";
 
 interface IRequest {
     id: string;
-    nome: string;
-    descricao: string;
+    name: string;
+    description: string;
     classe: string;
-    nivel: number;
-    raca: string;
-    pontosDeVida: number;
+    level: number;
+    race: string;
+    life: number;
 }
 
 class UpdatePersonagemService {
-    async execute({ id, nome, descricao, classe, nivel, raca, pontosDeVida }: IRequest) {
+    async execute({ id, name, description, level, classe, race, life }: IRequest) {
         const personagem = await prismaClient.personagem.findUnique({
             where: {
                 id,
@@ -28,12 +28,12 @@ class UpdatePersonagemService {
             },
             data: {
                 ...personagem,
-                nome,
-                descricao,
+                name,
+                description,
                 classe,
-                nivel,
-                raca,
-                pontosDeVida,
+                level,
+                race,
+                life,
             },
         });
 

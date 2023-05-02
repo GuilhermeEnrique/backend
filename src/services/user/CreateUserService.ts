@@ -5,11 +5,12 @@ interface UserRequest {
     name: string;
     email: string;
     biografia: string;
+    banner: string;
     password: string;
 }
 
 class CreateUserService {
-    async execute({ name, biografia, email, password }: UserRequest) {
+    async execute({ name, biografia, email, password, banner }: UserRequest) {
         //verificar se enviou um email
         if (!email) {
             throw new Error("E-mail incorreto")
@@ -33,6 +34,7 @@ class CreateUserService {
                 name: name,
                 email: email,
                 biografia: biografia,
+                banner: banner,
                 password: passwordHash,
             },
             select:{

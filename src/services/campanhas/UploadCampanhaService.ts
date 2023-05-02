@@ -2,12 +2,12 @@ import prismaClient from "../../prisma";
 
 interface CRequest {
     id: string;
-    titulo: string;
-    descricao: string;
+    title: string;
+    description: string;
 }
 
 class UpdateCampanhaService {
-    async execute({ id, titulo, descricao }: CRequest) {
+    async execute({ id, title, description }: CRequest) {
         const campanha = await prismaClient.campanhas.findUnique({
             where: {
                 id,
@@ -24,8 +24,8 @@ class UpdateCampanhaService {
             },
             data: {
                 ...campanha,
-                titulo,
-                descricao,
+                title,
+                description,
             },
         });
 

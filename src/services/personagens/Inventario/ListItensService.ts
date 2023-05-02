@@ -12,10 +12,10 @@ class ListItensService {
             },
             select: {
                 id: true,
-                nomeDoItem: true,
-                tipoDoItem: true,
-                descricao: true,
-                quantidade: true,
+                name: true,
+                type: true,
+                description: true,
+                amount: true,
                 personagemId: true
             }
         })

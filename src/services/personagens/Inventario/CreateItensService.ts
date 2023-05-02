@@ -1,19 +1,19 @@
 import prismaClient from "../../../prisma";
 interface ItensRequest {
-    nomeDoItem: string;
-    tipoDoItem: string;
-    descricao: string;
-    quantidade: number;
+    name: string;
+    type: string;
+    description: string;
+    amount: number;
     personagemId: string;
 }
 class CreateItensService {
-    async execute({ nomeDoItem, tipoDoItem, descricao, quantidade, personagemId }: ItensRequest) {
+    async execute({ name, type, description, amount, personagemId }: ItensRequest) {
         const itens = await prismaClient.inventario.create({
             data: {
-                nomeDoItem: nomeDoItem,
-                tipoDoItem: tipoDoItem,
-                descricao: descricao,
-                quantidade: quantidade,
+                name: name,
+                type: type,
+                description: description,
+                amount: amount,
                 personagemId: personagemId
             }
         })

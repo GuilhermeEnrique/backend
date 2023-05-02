@@ -1,21 +1,22 @@
 import prismaClient from "../../prisma";
 
 interface CampanhasRequest {
-    titulo: string,
-    descricao: string,
+    title: string,
+    description: string,
+    banner: string
 }
 class CreateCampanhasService {
-    async execute({ titulo, descricao }: CampanhasRequest) {
-        if (titulo == '') {
+    async execute({ title, description, banner }: CampanhasRequest) {
+        if (title == '') {
             throw new Error('Titulo ínvalido');
         }
         const campanha = await prismaClient.campanhas.create({
             data: {
-                titulo: titulo,
-                descricao: descricao
+                title: title,
+                description: description,
+                banner: banner
             }
         })
-
         return campanha;
     }
 }

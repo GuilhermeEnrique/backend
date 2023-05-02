@@ -4,7 +4,8 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "biografia" TEXT NOT NULL,
+    "biografia" TEXT,
+    "banner" TEXT,
     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
@@ -14,9 +15,9 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Campanhas" (
     "id" TEXT NOT NULL,
-    "icon_campanha" TEXT NOT NULL,
-    "titulo" TEXT NOT NULL,
-    "descricao" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "banner" TEXT NOT NULL,
     "created_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) DEFAULT CURRENT_TIMESTAMP,
 
@@ -26,13 +27,14 @@ CREATE TABLE "Campanhas" (
 -- CreateTable
 CREATE TABLE "Personagem" (
     "id" TEXT NOT NULL,
-    "nome" TEXT NOT NULL,
-    "descricao" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
     "classe" TEXT NOT NULL,
-    "nivel" INTEGER NOT NULL,
-    "raca" TEXT NOT NULL,
-    "pontosDeVida" INTEGER NOT NULL,
-    "campanhasId" TEXT,
+    "race" TEXT NOT NULL,
+    "banner" TEXT NOT NULL,
+    "level" INTEGER NOT NULL,
+    "life" INTEGER NOT NULL,
+    "campanhasId" TEXT NOT NULL,
 
     CONSTRAINT "Personagem_pkey" PRIMARY KEY ("id")
 );
@@ -40,10 +42,10 @@ CREATE TABLE "Personagem" (
 -- CreateTable
 CREATE TABLE "Inventario" (
     "id" TEXT NOT NULL,
-    "nomeDoItem" TEXT NOT NULL,
-    "tipoDoItem" TEXT NOT NULL,
-    "descricao" TEXT,
-    "quantidade" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "amount" INTEGER NOT NULL,
     "personagemId" TEXT NOT NULL,
 
     CONSTRAINT "Inventario_pkey" PRIMARY KEY ("id")
@@ -52,12 +54,12 @@ CREATE TABLE "Inventario" (
 -- CreateTable
 CREATE TABLE "Atributo" (
     "id" TEXT NOT NULL,
-    "forca" INTEGER NOT NULL,
-    "destreza" INTEGER NOT NULL,
-    "constituicao" INTEGER NOT NULL,
-    "inteligencia" INTEGER NOT NULL,
-    "sabedoria" INTEGER NOT NULL,
-    "carisma" INTEGER NOT NULL,
+    "force" INTEGER NOT NULL,
+    "dexterity" INTEGER NOT NULL,
+    "constitution" INTEGER NOT NULL,
+    "intelligence" INTEGER NOT NULL,
+    "wisdom" INTEGER NOT NULL,
+    "charisma" INTEGER NOT NULL,
     "personagemId" TEXT NOT NULL,
 
     CONSTRAINT "Atributo_pkey" PRIMARY KEY ("id")
@@ -67,7 +69,7 @@ CREATE TABLE "Atributo" (
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
-ALTER TABLE "Personagem" ADD CONSTRAINT "Personagem_campanhasId_fkey" FOREIGN KEY ("campanhasId") REFERENCES "Campanhas"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Personagem" ADD CONSTRAINT "Personagem_campanhasId_fkey" FOREIGN KEY ("campanhasId") REFERENCES "Campanhas"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Inventario" ADD CONSTRAINT "Inventario_personagemId_fkey" FOREIGN KEY ("personagemId") REFERENCES "Personagem"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

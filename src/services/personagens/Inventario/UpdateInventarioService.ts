@@ -2,15 +2,15 @@ import prismaClient from "../../../prisma";
 
 interface IRequest {
     id: string;
-    nomeDoItem: string;
-    tipoDoItem: string;
-    descricao: string;
-    quantidade: number;
+    name: string;
+    type: string;
+    description: string;
+    amount: number;
     personagemId: string;
 }
 
 class UpdateInventarioService {
-    async execute({ id, nomeDoItem, tipoDoItem, descricao, quantidade, personagemId }: IRequest) {
+    async execute({ id, name, type, description, amount, personagemId }: IRequest) {
         const inventario = await prismaClient.inventario.findUnique({
             where: {
                 id,
@@ -26,10 +26,10 @@ class UpdateInventarioService {
             },
             data: {
                 ...inventario,
-                nomeDoItem,
-                tipoDoItem,
-                descricao,
-                quantidade,
+                name,
+                type,
+                description,
+                amount,
                 personagemId,
             },
         });

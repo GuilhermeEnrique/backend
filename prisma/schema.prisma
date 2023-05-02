@@ -13,64 +13,56 @@ model User {
   email      String    @unique
   password   String
   biografia  String?
+  banner     String?
   created_at DateTime? @default(now())
   updated_at DateTime? @default(now())
 }
 
 model Campanhas {
-  id          String       @id @default(uuid())
-  titulo      String
-  descricao   String
-  created_at  DateTime?    @default(now())
-  updated_at  DateTime?    @default(now())
-  imagem      Imagem[]
-  personagens Personagem[]
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  banner      String
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+
+  characters Personagem[]
 }
 
 model Personagem {
-  id           String       @id @default(uuid())
-  nome         String
-  descricao    String
-  classe       String
-  nivel        Int
-  raca         String
-  pontosDeVida Int
-  campanhasId  String?
-  atributos    Atributo[]
-  imagem       Imagem[]
-  inventarios  Inventario[]
-  Campanhas    Campanhas?   @relation(fields: [campanhasId], references: [id])
+  id          String     @id @default(uuid())
+  name        String
+  description String
+  classe      String
+  race        String
+  banner      String
+  level       Int
+  life        Int
+  campanhas   Campanhas? @relation(fields: [campanhasId], references: [id])
+  campanhasId String
+
+  atributos   Atributo[]
+  inventarios Inventario[]
 }
 
 model Inventario {
   id           String     @id @default(uuid())
-  nomeDoItem   String
-  tipoDoItem   String
-  descricao    String?
-  quantidade   Int
-  personagemId String
+  name         String
+  type         String
+  description  String
+  amount       Int
   personagem   Personagem @relation(fields: [personagemId], references: [id])
+  personagemId String
 }
 
 model Atributo {
   id           String     @id @default(uuid())
-  forca        Int
-  destreza     Int
-  constituicao Int
-  inteligencia Int
-  sabedoria    Int
-  carisma      Int
-  personagemId String
+  force        Int
+  dexterity    Int
+  constitution Int
+  intelligence Int
+  wisdom       Int
+  charisma     Int
   personagem   Personagem @relation(fields: [personagemId], references: [id])
-}
-
-model Imagem {
-  id           String      @id @default(uuid())
-  url          String
-  personagemId String?
-  campanhasId  String?
-  created_at   DateTime?   @default(now())
-  updated_at   DateTime?   @default(now())
-  campanha     Campanhas?  @relation(fields: [campanhasId], references: [id])
-  personagem   Personagem? @relation(fields: [personagemId], references: [id])
+  personagemId String
 }

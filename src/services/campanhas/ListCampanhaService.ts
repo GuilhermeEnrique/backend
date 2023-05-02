@@ -10,21 +10,6 @@ class ListCampanhaService {
         const campanha = await prismaClient.campanhas.findMany({
             where: {
                 id: id,
-            },
-            include: {
-                imagem: {
-                    select: {
-                        id: true,
-                        url: true,
-                        campanhasId: true,
-                    }
-                },
-                personagens: {
-                    select: {
-                        id: true,
-                        nome: true
-                    }
-                }
             }
         })
 

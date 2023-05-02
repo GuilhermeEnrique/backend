@@ -1,25 +1,26 @@
 import prismaClient from "../../prisma";
 
 interface PersongemRequest {
-    nome: string;
-    descricao: string;
+    name: string;
+    description: string;
     classe: string;
-    raca: string;
-    nivel: string;
-    pontosDeVida: string
+    race: string;
+    level: string;
+    life: string;
+    banner: string;
     campanhasId: string;
 }
 
 class CreatePersonagemService {
-    async execute({ nome, descricao, classe, nivel, raca, pontosDeVida, campanhasId }: PersongemRequest) {
+    async execute({ name, description, classe, level, race, life, campanhasId }: PersongemRequest) {
         const personagem = await prismaClient.personagem.create({
             data: {
-                nome: nome,
-                descricao: descricao,
+                name: name,
+                description: description,
                 classe: classe,
-                nivel: parseInt(nivel, 10),
-                raca: raca,
-                pontosDeVida: parseInt(pontosDeVida,10),
+                level: parseInt(level, 10),
+                race: race,
+                life: parseInt(life, 10),
                 campanhasId: campanhasId
             }
         })

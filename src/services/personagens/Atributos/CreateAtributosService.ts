@@ -1,34 +1,34 @@
 import prismaClient from "../../../prisma";
 
 interface AtributosRequest {
-    forca: number;
-    destreza: number;
-    constituicao: number;
-    inteligencia: number;
-    sabedoria: number;
-    carisma: number;
+    force: number;
+    dexterity: number
+    constitution: number
+    intelligence: number
+    wisdom: number
+    charisma: number
     personagemId: string;
 }
 
 class CreateAtributosService {
-    async execute({ forca, destreza, constituicao, inteligencia, sabedoria, carisma, personagemId }: AtributosRequest) {
+    async execute({ force, dexterity, constitution, intelligence, wisdom, charisma, personagemId }: AtributosRequest) {
         const atributos = await prismaClient.atributo.create({
             data: {
-                forca: forca,
-                destreza: destreza,
-                constituicao: constituicao,
-                inteligencia: inteligencia,
-                sabedoria: sabedoria,
-                carisma: carisma,
+                force: force,
+                dexterity: dexterity,
+                constitution: constitution,
+                intelligence: intelligence,
+                wisdom: wisdom,
+                charisma: charisma,
                 personagemId: personagemId
-            }, select:{
+            }, select: {
                 id: true,
-                forca: true,
-                carisma: true,
-                constituicao: true,
-                inteligencia: true,
-                sabedoria: true,
-                destreza: true,
+                force: true,
+                dexterity: true,
+                constitution: true,
+                intelligence: true,
+                wisdom: true,
+                charisma: true,
                 personagemId: true
             }
         })
