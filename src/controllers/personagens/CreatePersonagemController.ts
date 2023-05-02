@@ -3,20 +3,26 @@ import { CreatePersonagemService } from "../../services/personagens/CreatePerson
 
 class CreatePersonagemController {
     async handle(req: Request, res: Response) {
-        const { nome, descricao, classe, nivel, raca, pontosDeVida, campanhasId } = req.body;
+        const { name, description, classe, level, race, life, banner, campanhasId } = req.body;
 
         const createPersonagemService = new CreatePersonagemService();
+        if (!req.file) {
+            throw new Error("Error upload file");
+        } else {
+            const { originalname, filename: banner } = req.file;
 
-        const personagem = await createPersonagemService.execute({
-            nome,
-            descricao,
-            classe,
-            nivel,
-            raca,
-            pontosDeVida,
-            campanhasId,
-        });
-        return res.json(personagem)
+            const personagem = await createPersonagemService.execute({
+                name,
+                description,
+                classe,
+                level,
+                race,
+                life,
+                banner,
+                campanhasId,
+            });
+            return res.json(personagem)
+        }
     }
 }
 

@@ -46,25 +46,25 @@ const router = Router();
 const upload = multer(uploadConfig.upload("./uploads"));
 
 //rotas dos users
-router.post('/users', new CreateUserController().handle)
+router.post('/users', upload.single('file'), new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 router.get('/about', isAuthenticated, new DetailUserController().handle)
 router.put('/user/password', isAuthenticated, new UpdatePasswordController().handle)
 
 //rotas das campanhas
-router.post('/campanha', isAuthenticated, new CreateCampanhaController().handle)
+router.post('/campanha', isAuthenticated, upload.single('file'), new CreateCampanhaController().handle)
 router.get('/campanha', isAuthenticated, new ListCampanhaController().handle)
 router.put('/campanha/:id', isAuthenticated, new UpdateCampanhaController().handle)
 router.delete('/campanha/delete', isAuthenticated, new DeleteCamapanhaController().handle)
 
 //rota dos personagens
-router.post('/personagem', isAuthenticated, new CreatePersonagemController().handle)
+router.post('/personagem', isAuthenticated, upload.single('file'), new CreatePersonagemController().handle)
 router.get('/campanha/personagens', isAuthenticated, new ListPersonagemController().handle)
 router.put('/personagem/:id', isAuthenticated, new UpdatePersonagemController().handle);
 router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersonagemController().handle)
 
 //rota de upload das imagens
-router.post('/upload/imagem', isAuthenticated, upload.single('image'), new UploadImageController().handle)
+router.post('/upload/imagem', isAuthenticated, upload.single('file'), new UploadImageController().handle)
 router.delete('/delete/imagem', isAuthenticated, new DeleteImageController().handle)
 
 //rota dos itens

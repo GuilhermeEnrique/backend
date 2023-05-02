@@ -3,15 +3,23 @@ import { CreateCampanhasService } from "../../services/campanhas/CreateCampanhaS
 
 class CreateCampanhaController {
     async handle(req: Request, res: Response) {
-        const { titulo, descricao } = req.body;
+        const { title, description } = req.body;
 
         const createCampanhasService = new CreateCampanhasService();
 
-        const campanha = await createCampanhasService.execute({
-            titulo,
-            descricao
-        });
-        return res.json(campanha);
+        if (!req.file) {
+            throw new Error("Error upload file");
+        } else {
+            const { originalname, filename: banner } = req.file;
+            
+            const campanha = await createCampanhasService.execute({
+                title,
+                description,
+                banner
+            });
+
+            return res.json(campanha);
+        }
     }
 }
 

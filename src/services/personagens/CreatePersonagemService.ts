@@ -12,14 +12,19 @@ interface PersongemRequest {
 }
 
 class CreatePersonagemService {
-    async execute({ name, description, classe, level, race, life, campanhasId }: PersongemRequest) {
+    async execute({ name, description, classe, race, banner, level, life, campanhasId }: PersongemRequest) {
+        if (name == '') {
+            throw new Error('Preencha os campos corretamente');
+        }
         const personagem = await prismaClient.personagem.create({
+
             data: {
                 name: name,
                 description: description,
                 classe: classe,
-                level: parseInt(level, 10),
                 race: race,
+                banner: banner,
+                level: parseInt(level, 10),
                 life: parseInt(life, 10),
                 campanhasId: campanhasId
             }
