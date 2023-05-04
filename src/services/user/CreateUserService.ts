@@ -1,6 +1,5 @@
 import prismaClient from "../../prisma";
 import { hash } from "bcryptjs";
-
 interface UserRequest {
     name: string;
     email: string;
@@ -8,7 +7,6 @@ interface UserRequest {
     banner: string;
     password: string;
 }
-
 class CreateUserService {
     async execute({ name, biografia, email, password, banner }: UserRequest) {
         //verificar se enviou um email

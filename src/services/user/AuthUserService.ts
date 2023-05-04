@@ -1,12 +1,10 @@
 import prismaClient from "../../prisma";
 import { compare } from "bcryptjs";
 import { sign } from 'jsonwebtoken';
-
 interface AuthRequest {
     email: string;
     password: string;
 }
-
 class AuthUserService {
     async execute({ email, password }: AuthRequest) {
         //Verificar se o email existe:
