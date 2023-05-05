@@ -3,7 +3,7 @@ import { CreatePersonagemService } from "../../services/personagens/CreatePerson
 
 class CreatePersonagemController {
     async handle(req: Request, res: Response) {
-        const { name, description, classe, level, race, life, banner, campanhasId } = req.body;
+        const { name, description, classe, level, race, life, banner, campanhasId, userId } = req.body;
 
         const createPersonagemService = new CreatePersonagemService();
         if (!req.file) {
@@ -20,6 +20,7 @@ class CreatePersonagemController {
                 life,
                 banner,
                 campanhasId,
+                userId
             });
             return res.json(personagem)
         }

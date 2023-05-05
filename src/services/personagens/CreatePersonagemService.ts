@@ -9,10 +9,11 @@ interface PersongemRequest {
     life: string;
     banner: string;
     campanhasId: string;
+    userId: string;
 }
 
 class CreatePersonagemService {
-    async execute({ name, description, classe, race, banner, level, life, campanhasId }: PersongemRequest) {
+    async execute({ name, description, classe, race, banner, level, life, campanhasId, userId }: PersongemRequest) {
         if (name == '') {
             throw new Error('Preencha os campos corretamente');
         }
@@ -26,7 +27,8 @@ class CreatePersonagemService {
                 banner: banner,
                 level: parseInt(level, 10),
                 life: parseInt(life, 10),
-                campanhasId: campanhasId
+                campanhasId: campanhasId,
+                userId: userId
             }
         })
         return personagem;
