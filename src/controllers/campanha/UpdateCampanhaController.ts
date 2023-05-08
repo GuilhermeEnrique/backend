@@ -3,18 +3,23 @@ import { UpdateCampanhaService } from "../../services/campanhas/UploadCampanhaSe
 
 class UpdateCampanhaController {
     async handle(req: Request, res: Response) {
-        const { id, titulo, descricao } = req.body;
-
+        const { id, title, description } = req.body;
         const updateCampanhaService = new UpdateCampanhaService();
 
-        const campanha = await updateCampanhaService.execute({
-            id,
-            titulo,
-            descricao,
-        });
+        if (!req.file) {
+            throw new Error("Error upload file");
+        } else {
+            const { originalname, filename: banner } = req.file;
 
-        return res.json(campanha);
+            const campanha = await updateCampanhaService.execute({
+                id,
+                title,
+                description,
+                banner
+            });
+
+            return res.json(campanha);
+        }
     }
 }
-
 export { UpdateCampanhaController };

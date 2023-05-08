@@ -54,7 +54,7 @@ router.put('/user/password', isAuthenticated, new UpdatePasswordController().han
 //rotas das campanhas
 router.post('/campanha', isAuthenticated, upload.single('file'), new CreateCampanhaController().handle)
 router.get('/campanha', isAuthenticated, new ListCampanhaController().handle)
-router.put('/campanha/:id', isAuthenticated, new UpdateCampanhaController().handle)
+router.put('/campanha/:id', isAuthenticated, upload.single('file'), new UpdateCampanhaController().handle)
 router.delete('/campanha/delete', isAuthenticated, new DeleteCamapanhaController().handle)
 
 //rota dos personagens
