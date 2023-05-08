@@ -1,4 +1,5 @@
-import { Router } from 'express'
+import express, { Router } from 'express';
+import path from 'path';
 import multer from 'multer';
 
 //Controllers do usuários
@@ -45,6 +46,8 @@ const router = Router();
 
 const upload = multer(uploadConfig.upload("./uploads"));
 
+router.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
 //rotas dos users
 router.post('/users', upload.single('file'), new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
@@ -66,6 +69,7 @@ router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersona
 //rota de upload das imagens
 router.post('/upload/imagem', isAuthenticated, upload.single('file'), new UploadImageController().handle)
 router.delete('/delete/imagem', isAuthenticated, new DeleteImageController().handle)
+
 
 //rota dos itens
 router.post('/personagem/inventario', isAuthenticated, new CreateItensController().handle)
