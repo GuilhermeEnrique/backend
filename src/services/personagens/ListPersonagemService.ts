@@ -11,9 +11,15 @@ class ListPersonagemService {
             where: {
                 userId: userId,
                 campanhasId: campanhasId
+            }, include: {
+                campanhas: {
+                    select: {
+                        id: true,
+                        title: true
+                    }
+                }
             }
         })
-
         return findByCampanha;
     }
 }
