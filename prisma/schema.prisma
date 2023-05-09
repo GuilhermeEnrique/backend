@@ -32,7 +32,7 @@ model Campanhas {
 }
 
 model Personagem {
-  id          String       @id @default(uuid())
+  id          String @id @default(uuid())
   name        String
   description String
   classe      String
@@ -40,13 +40,13 @@ model Personagem {
   banner      String
   level       Int
   life        Int
-  
-  campanhas   Campanhas?   @relation(fields: [campanhasId], references: [id])
+
+  campanhas   Campanhas? @relation(fields: [campanhasId], references: [id])
   campanhasId String
-  
-  Users        User         @relation(fields: [userId], references: [id])
-  userId      String
-  
+
+  Users  User?  @relation(fields: [userId], references: [id])
+  userId String
+
   atributos   Atributo[]
   inventarios Inventario[]
 }
