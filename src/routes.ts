@@ -20,6 +20,9 @@ import { ListPersonagemController } from './controllers/personagens/ListPersonag
 import { UpdatePersonagemController } from './controllers/personagens/UpdatePersonagemController';
 import { DeletePersonagemController } from './controllers/personagens/DeletePersonagemController';
 
+//controller dos dados
+import DiceController from './controllers/dados/DiceController';
+
 //Controller das imagem
 import { UploadImageController } from './controllers/imagem/UploadImageController';
 import { DeleteImageController } from './controllers/imagem/DeleteImagemController';
@@ -70,6 +73,8 @@ router.delete('/campanha/personagens/delete', isAuthenticated, new DeletePersona
 router.post('/upload/imagem', isAuthenticated, upload.single('file'), new UploadImageController().handle)
 router.delete('/delete/imagem', isAuthenticated, new DeleteImageController().handle)
 
+//dados
+router.post('/roll', DiceController.handleRoll);
 
 //rota dos itens
 router.post('/personagem/inventario', isAuthenticated, new CreateItensController().handle)
