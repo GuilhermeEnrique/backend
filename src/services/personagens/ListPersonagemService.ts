@@ -12,6 +12,12 @@ class ListPersonagemService {
                 userId: userId,
                 campanhasId: campanhasId
             }, include: {
+                Users: {
+                    select: {
+                        id: true,
+                        name: true
+                    }
+                },
                 campanhas: {
                     select: {
                         id: true,
