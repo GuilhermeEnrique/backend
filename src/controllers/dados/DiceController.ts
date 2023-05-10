@@ -1,27 +1,15 @@
 import { Request, Response } from 'express';
-import { rollDice, DiceType, RollResult } from '../../services/dados/DiceService';
+import { DiceService } from '../../services/dados/DiceService';
 
-class DiceController {
-    public async handleRoll(req: Request, res: Response): Promise<void> {
-        const { type, quantity } = req.body;
-
-        if (!type || !quantity) {
-            res.status(400).json({ error: "Missing required parameters." });
-            return;
+export class DiceController {
+    static async handleRoll(req: Request, res: Response): Promise<void> {
+        try {
+            const { type, quantity } = req.body;
+            const result = DiceService.rollDice(parseInt(type.substring(1)), quantity);
+            const sum = result.reduce((a, b) => a + b);
+            res.status(200).json({ result, sum });
+        } catch (err) {
+            res.status(500).json({ error: 'Internal server error' });
         }
-
-        const rolls: number[] = [];
-        let sum = 0;
-
-        for (let i = 0; i < quantity; i++) {
-            const result = rollDice(type, 1).rolls[0];
-            rolls.push(result);
-            sum += result;
-        }
-
-        res.status(200).json({ rolls, sum });
     }
-
 }
-
-export default new DiceController();
