@@ -5,7 +5,7 @@ export class DiceController {
     static async handleRoll(req: Request, res: Response): Promise<void> {
         try {
             const { type, quantity } = req.body;
-            const result = DiceService.rollDice(parseInt(type.substring(1)), quantity);
+            const result = DiceService.rollDice(parseInt(type), quantity);
             const sum = result.reduce((a, b) => a + b);
             res.status(200).json({ result, sum });
         } catch (err) {
