@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { UpdatePasswordService } from "../../services/user/UpdatePasswordService";
-
 class UpdatePasswordController {
     async handle(req: Request, res: Response) {
         // extrair as informações do corpo da solicitação:
@@ -17,5 +16,4 @@ class UpdatePasswordController {
         return res.json(novaSenha);
     }
 }
-
 export { UpdatePasswordController }
