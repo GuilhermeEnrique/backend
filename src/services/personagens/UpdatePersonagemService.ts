@@ -1,5 +1,4 @@
 import prismaClient from "../../prisma";
-
 interface IRequest {
     id: string;
     name: string;
@@ -9,23 +8,17 @@ interface IRequest {
     race: string;
     life: number;
 }
-
 class UpdatePersonagemService {
     async execute({ id, name, description, level, classe, race, life }: IRequest) {
         const personagem = await prismaClient.personagem.findUnique({
-            where: {
-                id,
-            },
+            where: { id },
         });
 
         if (!personagem) {
             throw new Error("Personagem não encontrado");
         }
-
         const updatedPersonagem = await prismaClient.personagem.update({
-            where: {
-                id,
-            },
+            where: { id },
             data: {
                 ...personagem,
                 name,
@@ -36,11 +29,8 @@ class UpdatePersonagemService {
                 life,
             },
         });
-
         return updatedPersonagem;
     }
 }
 
 export { UpdatePersonagemService };
-
-

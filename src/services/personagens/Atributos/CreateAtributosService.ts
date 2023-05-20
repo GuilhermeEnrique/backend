@@ -1,5 +1,4 @@
 import prismaClient from "../../../prisma";
-
 interface AtributosRequest {
     force: number;
     dexterity: number
@@ -9,7 +8,6 @@ interface AtributosRequest {
     charisma: number
     personagemId: string;
 }
-
 class CreateAtributosService {
     async execute({ force, dexterity, constitution, intelligence, wisdom, charisma, personagemId }: AtributosRequest) {
         const atributos = await prismaClient.atributo.create({
@@ -35,5 +33,4 @@ class CreateAtributosService {
         return atributos
     }
 }
-
 export { CreateAtributosService }

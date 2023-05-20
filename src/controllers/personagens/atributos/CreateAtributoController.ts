@@ -3,17 +3,17 @@ import { CreateAtributosService } from "../../../services/personagens/Atributos/
 
 class CreateAtributosController {
     async handle(req: Request, res: Response) {
-        const { forca, destreza, constituicao, inteligencia, sabedoria, carisma, personagemId } = req.body;
+        const {  force, dexterity, constitution, intelligence, wisdom, charisma, personagemId } = req.body;
 
         const createAtributosService = new CreateAtributosService();
 
         const atributos = await createAtributosService.execute({
-            forca,
-            destreza,
-            constituicao,
-            inteligencia,
-            sabedoria,
-            carisma,
+            force,
+            dexterity,
+            constitution,
+            intelligence,
+            wisdom,
+            charisma,
             personagemId,
         });
 

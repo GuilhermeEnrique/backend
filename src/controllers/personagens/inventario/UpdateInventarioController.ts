@@ -3,15 +3,15 @@ import { UpdateInventarioService } from '../../../services/personagens/Inventari
 
 class UpdateInventarioController {
     async handle(req: Request, res: Response) {
-        const { id, nomeDoItem, tipoDoItem, descricao, quantidade, personagemId } = req.body;
+        const { id, name, type, description, amount, personagemId } = req.body;
         const updateInventarioService = new UpdateInventarioService();
 
         const inventario = await updateInventarioService.execute({
             id,
-            nomeDoItem,
-            tipoDoItem,
-            descricao,
-            quantidade,
+            name,
+            type,
+            description,
+            amount,
             personagemId,
         });
 

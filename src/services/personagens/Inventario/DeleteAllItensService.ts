@@ -1,9 +1,7 @@
 import prismaClient from "../../../prisma";
-
 interface DeleteAllItensRequest {
     personagemId: string;
 }
-
 class DeleteAllItensService {
     async execute({ personagemId }: DeleteAllItensRequest) {
         const deleteResult = await prismaClient.inventario.deleteMany({
@@ -14,5 +12,4 @@ class DeleteAllItensService {
         return deleteResult
     }
 }
-
 export { DeleteAllItensService }

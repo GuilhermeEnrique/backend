@@ -1,18 +1,14 @@
 import prismaClient from "../../prisma";
-
 interface CRequest {
     id: string;
     title: string;
     description: string;
     banner: string;
 }
-
 class UpdateCampanhaService {
     async execute({ id, title, description, banner }: CRequest) {
         const campanha = await prismaClient.campanhas.findUnique({
-            where: {
-                id,
-            },
+            where: { id },
         });
 
         if (!campanha) {
@@ -20,9 +16,7 @@ class UpdateCampanhaService {
         }
 
         const updatedCampanha = await prismaClient.campanhas.update({
-            where: {
-                id,
-            },
+            where: { id },
             data: {
                 ...campanha,
                 title,

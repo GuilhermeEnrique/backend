@@ -1,9 +1,7 @@
 import prismaClient from "../../../prisma";
-
 interface ItensRequest {
     personagemId: string;
 }
-
 class ListItensService {
     async execute({ personagemId }: ItensRequest) {
         const findByPersonagem = await prismaClient.inventario.findMany({
@@ -22,5 +20,4 @@ class ListItensService {
         return findByPersonagem;
     }
 }
-
 export { ListItensService }

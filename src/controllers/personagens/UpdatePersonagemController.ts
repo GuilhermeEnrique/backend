@@ -3,18 +3,16 @@ import { UpdatePersonagemService } from '../../services/personagens/UpdatePerson
 
 class UpdatePersonagemController {
     async handle(req: Request, res: Response) {
-        const { id, nome, descricao, classe, nivel, raca, pontosDeVida } = req.body;
-
+        const { id, name, description, classe, level, race, life } = req.body;
         const updatePersonagemService = new UpdatePersonagemService();
-
         const personagem = await updatePersonagemService.execute({
             id,
-            nome,
-            descricao,
+            name,
+            description,
             classe,
-            nivel,
-            raca,
-            pontosDeVida,
+            level,
+            race,
+            life,
         });
 
         return res.json(personagem);

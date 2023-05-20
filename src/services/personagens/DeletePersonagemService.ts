@@ -1,9 +1,7 @@
 import prismaClient from "../../prisma";
-
 interface DeletePersongemRequest {
     personagemId: string;
 }
-
 class DeletePersonagemService {
     async execute({ personagemId }: DeletePersongemRequest) {
         //exclui todos os itens do inventãrio relacionado ao personagem
@@ -18,15 +16,12 @@ class DeletePersonagemService {
                 personagemId: personagemId
             }
         });
-
         const personagem = await prismaClient.personagem.delete({
             where: {
                 id: personagemId
             }
         });
-        
         return personagem;
     }
 }
-
 export { DeletePersonagemService }

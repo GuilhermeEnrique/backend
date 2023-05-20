@@ -7,9 +7,7 @@ interface DeleteRequest {
 class DeleteItensService {
     async execute({ id }: DeleteRequest) {
         const itens = await prismaClient.inventario.delete({
-            where: {
-                id: id
-            }
+            where: { id: id }
         })
         return itens;
     }

@@ -1,11 +1,9 @@
 import prismaClient from "../../prisma";
-
 interface PersonagemRequest {
     id: string;
     userId: string;
     campanhasId: string;
 }
-
 class ListPersonagemService {
     async execute({ id, campanhasId, userId }: PersonagemRequest) {
         const findByCampanha = await prismaClient.personagem.findMany({

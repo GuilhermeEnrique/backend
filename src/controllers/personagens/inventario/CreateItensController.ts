@@ -3,13 +3,13 @@ import { CreateItensService } from "../../../services/personagens/Inventario/Cre
 
 class CreateItensController {
     async handle(req: Request, res: Response) {
-        const { nomeDoItem, tipoDoItem, descricao, quantidade, personagemId } = req.body;
+        const { name, type, description, amount, personagemId } = req.body;
         const createItensService = new CreateItensService();
         const itens = await createItensService.execute({
-            nomeDoItem,
-            tipoDoItem,
-            descricao,
-            quantidade,
+            name,
+            type,
+            description,
+            amount,
             personagemId
         });
         return res.json(itens)
