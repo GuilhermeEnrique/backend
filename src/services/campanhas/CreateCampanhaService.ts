@@ -1,5 +1,4 @@
 import prismaClient from "../../prisma";
-
 interface CampanhasRequest {
     title: string,
     description: string,
