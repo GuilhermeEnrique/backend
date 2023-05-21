@@ -57,7 +57,7 @@ router.delete('/delete-campanha', isAuthenticated, new DeleteCamapanhaController
 //rota dos personagens
 router.post('/create-personagem', isAuthenticated, upload.single('file'), new CreatePersonagemController().handle)
 router.get('/listen-personagens', isAuthenticated, new ListPersonagemController().handle)
-router.put('/update-personagem/:id', isAuthenticated, new UpdatePersonagemController().handle);
+router.put('/update-personagem/:id', isAuthenticated, upload.single('file'), new UpdatePersonagemController().handle);
 router.delete('/delete-personagem', isAuthenticated, new DeletePersonagemController().handle)
 
 //rota de upload das imagens
