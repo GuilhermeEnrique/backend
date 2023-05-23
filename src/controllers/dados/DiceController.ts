@@ -12,4 +12,9 @@ export class DiceController {
             res.status(500).json({ error: 'Internal server error' });
         }
     }
+
+    static getRollHistory(req: Request, res: Response): void {
+        const history = DiceService.getHistory();
+        res.status(200).json({ history });
+    }
 }
