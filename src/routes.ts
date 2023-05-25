@@ -21,7 +21,6 @@ import { DeletePersonagemController } from './controllers/personagens/DeletePers
 import { DiceController } from './controllers/dados/DiceController';
 //Controller das imagem
 import { ProfileImageController } from "./controllers/imagem/ProfileImageController";
-import { UploadImageController } from './controllers/imagem/UploadImageController';
 import { DeleteImageController } from './controllers/imagem/DeleteImagemController';
 //Controllers dos itens
 import { CreateItensController } from './controllers/personagens/inventario/CreateItensController';
