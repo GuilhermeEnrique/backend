@@ -6,6 +6,7 @@ import { CreateUserController } from './controllers/user/CreateUserController';
 import { AuthUserController } from './controllers/user/AuthUserController';
 import { DetailUserController } from './controllers/user/DetailUserController';
 import { UpdatePasswordController } from './controllers/user/UpdatePasswordController';
+import { UpdateUserController } from './controllers/user/UpdateUserController';
 //Controllers das Campanhas
 import { CreateCampanhaController } from './controllers/campanha/CreateCampanhaController';
 import { ListCampanhaController } from './controllers/campanha/ListCampanhaController';
@@ -48,6 +49,7 @@ router.post('/create-user', upload.single('file'), new CreateUserController().ha
 router.post('/session', new AuthUserController().handle)
 router.get('/about', isAuthenticated, new DetailUserController().handle)
 router.put('/reset-password', isAuthenticated, new UpdatePasswordController().handle)
+router.put('/update-user:userId', isAuthenticated, upload.single('file'), new UpdateUserController().handle)
 
 //rotas das campanhas
 router.post('/create-campanha', isAuthenticated, upload.single('file'), new CreateCampanhaController().handle)

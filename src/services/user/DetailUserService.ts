@@ -10,8 +10,9 @@ class DetailUserService {
             select: {
                 id: true,
                 name: true,
-                banner: true,
+                biografia: true,
                 email: true,
+                banner: true,
             }
         }
         )
