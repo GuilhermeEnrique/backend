@@ -39,27 +39,29 @@ import uploadConfig from './config/multer'
 
 const router = Router();
 
-const upload = multer(uploadConfig.upload("./uploads"));
+const uploadProfile = multer(uploadConfig.upload("./uploads/profile"));
+const uploadCampaign = multer(uploadConfig.upload("./uploads/campaign"));
+const uploadCharacter = multer(uploadConfig.upload("./uploads/character"));
 
 router.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
 
 //rotas dos users
-router.post('/create-user', upload.single('file'), new CreateUserController().handle)
+router.post('/create-user', new CreateUserController().handle)
 router.post('/session', new AuthUserController().handle)
 router.get('/about', isAuthenticated, new DetailUserController().handle)
 router.put('/reset-password', isAuthenticated, new UpdatePasswordController().handle)
-router.put('/update-user:userId', isAuthenticated, upload.single('file'), new UpdateUserController().handle)
+router.put('/update-user:userId', isAuthenticated, uploadProfile.single('file'), new UpdateUserController().handle)
 
 //rotas das campanhas
-router.post('/create-campanha', isAuthenticated, upload.single('file'), new CreateCampanhaController().handle)
+router.post('/create-campanha', isAuthenticated, uploadCampaign.single('file'), new CreateCampanhaController().handle)
 router.get('/listen-campanha', isAuthenticated, new ListCampanhaController().handle)
-router.put('/update-campanha/:id', isAuthenticated, upload.single('file'), new UpdateCampanhaController().handle)
+router.put('/update-campanha/:id', isAuthenticated, uploadCampaign.single('file'), new UpdateCampanhaController().handle)
 router.delete('/delete-campanha', isAuthenticated, new DeleteCamapanhaController().handle)
 
 //rota dos personagens
-router.post('/create-personagem', isAuthenticated, upload.single('file'), new CreatePersonagemController().handle)
+router.post('/create-personagem', isAuthenticated, uploadCharacter.single('file'), new CreatePersonagemController().handle)
 router.get('/listen-personagens', isAuthenticated, new ListPersonagemController().handle)
-router.put('/update-personagem/:id', isAuthenticated, upload.single('file'), new UpdatePersonagemController().handle);
+router.put('/update-personagem/:id', isAuthenticated, uploadCharacter.single('file'), new UpdatePersonagemController().handle);
 router.delete('/delete-personagem', isAuthenticated, new DeletePersonagemController().handle)
 
 //rota de upload das imagens
