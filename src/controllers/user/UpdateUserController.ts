@@ -9,24 +9,26 @@ class UpdateUserController {
         if (req.file) {
             // Se o campo do arquivo estiver presente na requisição, atualize a imagem
             const { originalname, filename: banner } = req.file;
-            await updateUserService.execute({
+            const updatedUser = await updateUserService.execute({
                 userId: req.user_id,
                 name,
                 email,
                 biografia,
-                banner
+                banner,
             });
+            return res.json(updatedUser)
         } else {
             // Se o campo do arquivo não estiver presente, atualize apenas os outros dados
-            await updateUserService.execute({
+            const updatedUser = await updateUserService.execute({
                 userId: req.user_id,
                 name,
                 email,
                 biografia
             });
+            return res.json(updatedUser)
         }
 
-        return res.status(200).end("Alterado com sucesso");
+
     }
 }
 
