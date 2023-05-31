@@ -6,6 +6,8 @@ class UpdateUserController {
         const { name, email, biografia } = req.body;
         const updateUserService = new UpdateUserService();
 
+        console.log(req.user_id)
+
         if (req.file) {
             // Se o campo do arquivo estiver presente na requisição, atualize a imagem
             const { originalname, filename: banner } = req.file;
@@ -16,6 +18,7 @@ class UpdateUserController {
                 biografia,
                 banner,
             });
+
             return res.json(updatedUser)
         } else {
             // Se o campo do arquivo não estiver presente, atualize apenas os outros dados
@@ -25,6 +28,7 @@ class UpdateUserController {
                 email,
                 biografia
             });
+
             return res.json(updatedUser)
         }
 

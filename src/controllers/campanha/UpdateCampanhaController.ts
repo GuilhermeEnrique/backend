@@ -1,13 +1,21 @@
 import { Request, Response } from "express";
-import { UpdateCampanhaService } from "../../services/campanhas/UploadCampanhaService";
+import UpdateCampanhaService from "../../services/campanhas/UploadCampanhaService";
 
 class UpdateCampanhaController {
     async handle(req: Request, res: Response) {
-        const { id, title, description } = req.body;
+        const { title, description } = req.body;
+        const id = req.query.id as string;
+        
         const updateCampanhaService = new UpdateCampanhaService();
 
         if (!req.file) {
-            throw new Error("Error upload file");
+            const campanha = await updateCampanhaService.execute({
+                id,
+                title,
+                description,
+            });
+
+            return res.json(campanha);
         } else {
             const { originalname, filename: banner } = req.file;
 
@@ -15,11 +23,12 @@ class UpdateCampanhaController {
                 id,
                 title,
                 description,
-                banner
+                banner,
             });
 
             return res.json(campanha);
         }
     }
 }
+
 export { UpdateCampanhaController };

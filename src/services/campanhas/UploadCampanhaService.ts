@@ -1,14 +1,17 @@
 import prismaClient from "../../prisma";
-interface CRequest {
+
+interface UpdateCampanhaData  {
     id: string;
-    title: string;
-    description: string;
-    banner: string;
+    title?: string;
+    description?: string;
+    banner?: string;
 }
 class UpdateCampanhaService {
-    async execute({ id, title, description, banner }: CRequest) {
+    async execute({ id, title, description, banner }: UpdateCampanhaData ) {
         const campanha = await prismaClient.campanhas.findUnique({
-            where: { id },
+            where: {
+                id,
+            },
         });
 
         if (!campanha) {
@@ -16,17 +19,24 @@ class UpdateCampanhaService {
         }
 
         const updatedCampanha = await prismaClient.campanhas.update({
-            where: { id },
-            data: {
-                ...campanha,
-                title,
-                description,
-                banner
+            where: {
+                id
             },
+            data: {
+                title: title || campanha.title,
+                description: description || campanha.description,
+                banner: banner || campanha.banner,
+            },
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                banner: true,
+            }
         });
 
         return updatedCampanha;
     }
 }
 
-export { UpdateCampanhaService };
+export default UpdateCampanhaService;

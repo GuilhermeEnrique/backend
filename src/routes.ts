@@ -55,13 +55,13 @@ router.put('/update-user:userId', isAuthenticated, uploadProfile.single('file'),
 //rotas das campanhas
 router.post('/create-campanha', isAuthenticated, uploadCampaign.single('file'), new CreateCampanhaController().handle)
 router.get('/listen-campanha', isAuthenticated, new ListCampanhaController().handle)
-router.put('/update-campanha/:id', isAuthenticated, uploadCampaign.single('file'), new UpdateCampanhaController().handle)
+router.put('/update-campanha', isAuthenticated, uploadCampaign.single('file'), new UpdateCampanhaController().handle)
 router.delete('/delete-campanha', isAuthenticated, new DeleteCamapanhaController().handle)
 
 //rota dos personagens
 router.post('/create-personagem', isAuthenticated, uploadCharacter.single('file'), new CreatePersonagemController().handle)
 router.get('/listen-personagens', isAuthenticated, new ListPersonagemController().handle)
-router.put('/update-personagem/:id', isAuthenticated, uploadCharacter.single('file'), new UpdatePersonagemController().handle);
+router.put('/update-personagem', isAuthenticated, uploadCharacter.single('file'), new UpdatePersonagemController().handle);
 router.delete('/delete-personagem', isAuthenticated, new DeletePersonagemController().handle)
 
 //rota de upload das imagens
