@@ -1,16 +1,12 @@
 import prismaClient from "../../prisma";
 interface PersonagemRequest {
     id: string;
-    userId: string;
-    campanhasId: string;
 }
 class ListPersonagemService {
-    async execute({ id, campanhasId, userId }: PersonagemRequest) {
-        const findByCampanha = await prismaClient.personagem.findMany({
+    async execute({ id }: PersonagemRequest) {
+        const personagem = await prismaClient.personagem.findMany({
             where: {
                 id: id,
-                userId: userId,
-                campanhasId: campanhasId
             }, include: {
                 Users: {
                     select: {
@@ -26,7 +22,7 @@ class ListPersonagemService {
                 }
             }
         })
-        return findByCampanha;
+        return personagem;
     }
 }
 

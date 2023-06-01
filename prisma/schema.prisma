@@ -32,14 +32,17 @@ model Campanhas {
 }
 
 model Personagem {
-  id          String @id @default(uuid())
+  id          String    @id @default(uuid())
   name        String
-  description String
-  classe      String
-  race        String
-  banner      String
-  level       Int
-  life        Int
+  description String?
+  classe      String?
+  race        String?
+  personality String?
+  banner      String?
+  level       Int?
+  life        Int?
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
 
   campanhas   Campanhas? @relation(fields: [campanhasId], references: [id])
   campanhasId String

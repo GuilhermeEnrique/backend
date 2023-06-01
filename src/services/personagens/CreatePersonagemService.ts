@@ -2,6 +2,7 @@ import prismaClient from "../../prisma";
 interface PersongemRequest {
     name: string;
     description: string;
+    personality: string;
     classe: string;
     race: string;
     level: string;
@@ -11,7 +12,7 @@ interface PersongemRequest {
     userId: string;
 }
 class CreatePersonagemService {
-    async execute({ name, description, classe, race, banner, level, life, campanhasId, userId }: PersongemRequest) {
+    async execute({ name, description,personality,  classe, race, banner, level, life, campanhasId, userId }: PersongemRequest) {
         if (name === '' || description === '') {
             throw new Error('Preencha os campos corretamente');
         }
@@ -19,6 +20,7 @@ class CreatePersonagemService {
             data: {
                 name: name,
                 description: description,
+                personality: personality,
                 classe: classe,
                 race: race,
                 banner: banner,

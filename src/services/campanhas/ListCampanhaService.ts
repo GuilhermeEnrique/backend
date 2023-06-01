@@ -13,6 +13,7 @@ class ListCampanhaService {
                     select: {
                         name: true,
                         description: true,
+                        personality: true,
                         classe: true,
                         level: true,
                         race: true,
