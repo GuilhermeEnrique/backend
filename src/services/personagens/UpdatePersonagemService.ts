@@ -5,9 +5,9 @@ interface IRequest {
     description?: string;
     personality?: string;
     classe?: string;
-    level?: number;
+    level?: string;
     race?: string;
-    life?: number;
+    life?: string;
     banner?: string;
 }
 class UpdatePersonagemService {
@@ -27,10 +27,10 @@ class UpdatePersonagemService {
                 description: description || personagem.description,
                 personality: personality || personagem.personality,
                 classe: classe || personagem.classe,
-                level: level || personagem.level,
+                level: parseInt(level, 10) || personagem.level,
                 race: race || personagem.race,
-                life: life || personagem.life,
-                banner: name || personagem.name,
+                life: parseInt(life, 10) || personagem.life,
+                banner: banner || personagem.banner,
             },
         });
         return updatedPersonagem;
