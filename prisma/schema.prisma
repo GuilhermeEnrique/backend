@@ -58,7 +58,7 @@ model Inventario {
   id           String     @id @default(uuid())
   name         String
   type         String
-  description  String
+  description  String?
   amount       Int
   personagem   Personagem @relation(fields: [personagemId], references: [id])
   personagemId String
@@ -66,12 +66,12 @@ model Inventario {
 
 model Atributo {
   id           String     @id @default(uuid())
-  force        Int
-  dexterity    Int
-  constitution Int
-  intelligence Int
-  wisdom       Int
-  charisma     Int
+  force        Int?
+  dexterity    Int?
+  constitution Int?
+  intelligence Int?
+  wisdom       Int?
+  charisma     Int?
   personagem   Personagem @relation(fields: [personagemId], references: [id])
   personagemId String
 }
