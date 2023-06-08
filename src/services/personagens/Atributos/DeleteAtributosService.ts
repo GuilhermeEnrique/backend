@@ -1,18 +1,18 @@
 import prismaClient from "../../../prisma";
 
 interface DeleteAtributosRequest {
-    id: string;
+    personagemId: string;
 }
 
 class DeleteAtributosService {
-    async execute({ id }: DeleteAtributosRequest) {
-        const atributos = await prismaClient.atributo.delete({
+    async execute({ personagemId }: DeleteAtributosRequest) {
+        const atributos = await prismaClient.atributo.deleteMany({
             where: {
-                id: id
+                personagemId: personagemId
             }
-        })
+        });
         return atributos;
     }
 }
 
-export { DeleteAtributosService }
+export { DeleteAtributosService };

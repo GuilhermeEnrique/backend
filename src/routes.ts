@@ -32,6 +32,7 @@ import { DeleteAllItensController } from './controllers/personagens/inventario/D
 import { CreateAtributosController } from './controllers/personagens/atributos/CreateAtributoController';
 import { ListAtributosController } from './controllers/personagens/atributos/ListAtributosController';
 import { DeleteAtributosController } from './controllers/personagens/atributos/DeleteAtributosController';
+import { UpdateAtributosController } from './controllers/personagens/atributos/UpdateAtributosController';
 //Middleware de autenticidade
 import { isAuthenticated } from './middlewares/isAuthenticated';
 //importar Configurações do multer
@@ -82,5 +83,6 @@ router.delete('/deleteAll-itens', isAuthenticated, new DeleteAllItensController(
 router.post('/create-atributos', isAuthenticated, new CreateAtributosController().handle)
 router.get('/listen-atributos', isAuthenticated, new ListAtributosController().handle)
 router.delete('/delete-atributos', isAuthenticated, new DeleteAtributosController().handle)
+router.put('/update-atributos', isAuthenticated, new UpdateAtributosController().handle)
 
 export { router };

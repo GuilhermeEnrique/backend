@@ -3,13 +3,13 @@ import { DeleteAtributosService } from "../../../services/personagens/Atributos/
 
 class DeleteAtributosController {
     async handle(req: Request, res: Response) {
-        const id = req.query.id as string;
+        const personagemId = req.query.personagemId as string;
         const deleteAtributos = new DeleteAtributosService();
         const atributos = await deleteAtributos.execute({
-            id
+            personagemId
         });
         return res.json(atributos);
     }
 }
-    
-export { DeleteAtributosController }
+
+export { DeleteAtributosController };
