@@ -2,15 +2,15 @@ import prismaClient from "../../prisma";
 import { compare, hash } from "bcryptjs";
 import { sign } from 'jsonwebtoken';
 interface ChangePasswordRequest {
-    userId: string;
+    email: string;
     oldPassword: string;
     newPassword: string;
 }
 class UpdatePasswordService {
-    async execute({ userId, oldPassword, newPassword }: ChangePasswordRequest) {
+    async execute({ email, oldPassword, newPassword }: ChangePasswordRequest) {
         // Verificar se o usuário existe
         const user = await prismaClient.user.findUnique({
-            where: { id: userId }
+            where: { email: email }
         });
         if (!user) {
             throw new Error("Usuário não encontrado!");
@@ -25,7 +25,7 @@ class UpdatePasswordService {
         // Atualizar a senha no banco de dados
         const updatedUser = await prismaClient.user.update({
             where: {
-                id: userId
+                email: email
             },
             data: {
                 password: newPasswordHash
