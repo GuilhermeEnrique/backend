@@ -3,17 +3,17 @@ interface ItensRequest {
     name: string;
     type: string;
     description: string;
-    amount: number;
+    amount: string;
     personagemId: string;
 }
 class CreateItensService {
-    async execute({ name, type, description, amount, personagemId }: ItensRequest) {
+    async execute({name, type, description, amount, personagemId}: ItensRequest) {
         const itens = await prismaClient.inventario.create({
             data: {
                 name: name,
                 type: type,
                 description: description,
-                amount: amount,
+                amount: parseInt(amount, 10),
                 personagemId: personagemId
             }
         })

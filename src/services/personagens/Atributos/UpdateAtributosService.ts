@@ -11,8 +11,7 @@ interface UpdateAtributosRequest {
 }
 
 class UpdateAtributosService {
-    async execute({
-        personagemId, force, dexterity, constitution, intelligence, wisdom, charisma }: UpdateAtributosRequest) {
+    async execute({ personagemId, force, dexterity, constitution, intelligence, wisdom, charisma }: UpdateAtributosRequest) {
         const atributos = await prismaClient.atributo.updateMany({
             where: {
                 personagemId: personagemId

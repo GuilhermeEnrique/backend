@@ -75,7 +75,7 @@ router.get('/roll/history', DiceController.getRollHistory);
 //rota dos itens
 router.post('/create-inventario', isAuthenticated, new CreateItensController().handle)
 router.get('/listen-inventario', isAuthenticated, new ListItensController().handle)
-router.put('/update-itens', isAuthenticated, new UpdateInventarioController().handle)
+router.put('/update-inventario', isAuthenticated, new UpdateInventarioController().handle)
 router.delete('/delete-item', isAuthenticated, new DeleteItensController().handle)
 router.delete('/deleteAll-itens', isAuthenticated, new DeleteAllItensController().handle)
 
