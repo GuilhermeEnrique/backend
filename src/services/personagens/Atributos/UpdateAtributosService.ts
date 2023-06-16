@@ -1,5 +1,4 @@
 import prismaClient from "../../../prisma";
-
 interface UpdateAtributosRequest {
     personagemId: string;
     force: string;
@@ -9,7 +8,6 @@ interface UpdateAtributosRequest {
     wisdom: string;
     charisma: string;
 }
-
 class UpdateAtributosService {
     async execute({ personagemId, force, dexterity, constitution, intelligence, wisdom, charisma }: UpdateAtributosRequest) {
         const atributos = await prismaClient.atributo.updateMany({

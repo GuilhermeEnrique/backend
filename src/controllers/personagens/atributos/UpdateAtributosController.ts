@@ -3,15 +3,7 @@ import { UpdateAtributosService } from "../../../services/personagens/Atributos/
 
 class UpdateAtributosController {
     async handle(req: Request, res: Response) {
-        const {
-            personagemId,
-            force,
-            dexterity,
-            constitution,
-            intelligence,
-            wisdom,
-            charisma
-        } = req.body;
+        const { personagemId, force, dexterity, constitution, intelligence, wisdom, charisma } = req.body;
 
         const updateAtributos = new UpdateAtributosService();
         const atributos = await updateAtributos.execute({

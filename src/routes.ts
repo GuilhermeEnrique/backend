@@ -62,7 +62,7 @@ router.delete('/delete-campanha', isAuthenticated, new DeleteCamapanhaController
 //rota dos personagens
 router.post('/create-personagem', isAuthenticated, uploadCharacter.single('file'), new CreatePersonagemController().handle)
 router.get('/listen-personagens', isAuthenticated, new ListPersonagemController().handle)
-router.put('/update-personagem', isAuthenticated, uploadCharacter.single('file'), new UpdatePersonagemController().handle);
+router.put('/update-personagem', isAuthenticated, uploadCharacter.single('file'), new UpdatePersonagemController().handle)
 router.delete('/delete-personagem', isAuthenticated, new DeletePersonagemController().handle)
 
 //rota de upload das imagens
@@ -70,7 +70,6 @@ router.get('/profile/image', isAuthenticated, new ProfileImageController().handl
 
 //dados
 router.post('/roll', DiceController.handleRoll);
-router.get('/roll/history', DiceController.getRollHistory);
 
 //rota dos itens
 router.post('/create-inventario', isAuthenticated, new CreateItensController().handle)
