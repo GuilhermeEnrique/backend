@@ -9,7 +9,7 @@ class ListPersonagemController {
 
         const personagens = await listByCampanha.execute({ id });
 
-        return res.json(personagens); //Retorna a lista de personagens como resposta HTTP, no formato JSON
+        return res.json(personagens); 
     }
 }
 
