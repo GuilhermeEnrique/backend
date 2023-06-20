@@ -17,7 +17,12 @@ class ListItensService {
                 personagemId: true
             }
         })
-        return findByPersonagem;
+        const itemsWithAmountAsString = findByPersonagem.map((item) => ({
+            ...item,
+            amount: item.amount.toString()
+        }));
+    
+        return itemsWithAmountAsString;
     }
 }
 export { ListItensService }
