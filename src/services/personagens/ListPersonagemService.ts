@@ -22,7 +22,13 @@ class ListPersonagemService {
                 }
             }
         })
-        return personagem;
+        const itemsAsString = personagem.map((item) => ({
+            ...item,
+            level: item.level.toString(),
+            life: item.life.toString()
+        }));
+    
+        return itemsAsString;
     }
 }
 

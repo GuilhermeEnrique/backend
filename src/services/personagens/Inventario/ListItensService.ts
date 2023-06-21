@@ -17,6 +17,7 @@ class ListItensService {
                 personagemId: true
             }
         })
+        
         const itemsWithAmountAsString = findByPersonagem.map((item) => ({
             ...item,
             amount: item.amount.toString()
